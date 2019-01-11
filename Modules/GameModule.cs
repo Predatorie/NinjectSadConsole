@@ -9,6 +9,7 @@ namespace ConsoleAppTest.Modules
         public override void Load()
         {
             this.Bind<IKeyboardService>().To<KeyboardService>().InSingletonScope();
+            this.Bind<IGameManager>().To<GameManager>().InSingletonScope();
         }
     }
 

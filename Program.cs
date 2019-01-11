@@ -5,7 +5,6 @@
     using ConsoleAppTest.Services;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
     using Ninject;
     using SadConsole;
     using Console = SadConsole.Console;
@@ -17,7 +16,7 @@
 
         public const int Width = 80;
 
-        private static IKeyboardService keyboardService;
+        private static IGameManager gameManager;
 
         private static void Init()
         {
@@ -59,7 +58,7 @@
         {
             using(IKernel kernel = new StandardKernel(new GameModule()))
             {
-                keyboardService = kernel.Get<IKeyboardService>();
+                gameManager = kernel.Get<IGameManager>();
             }
         }
 
@@ -72,7 +71,7 @@
             //}
 
             // As an example, we'll use the F5 key to make the game full screen
-            keyboardService.IsKeyDown(Keys.F5);
+            gameManager.Update(time);
         }
     }
 
