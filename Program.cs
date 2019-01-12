@@ -1,21 +1,22 @@
 ﻿namespace ConsoleAppTest
 {
 
+    using ConsoleAppTest.Consoles;
     using ConsoleAppTest.Modules;
     using ConsoleAppTest.Services;
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
     using Ninject;
     using SadConsole;
+    using SadConsole.Entities;
+    using SadConsole.Surfaces;
     using SadConsole.Themes;
-    using Console = SadConsole.Console;
     using Game = SadConsole.Game;
 
     public class Program
     {
-        public static int GameHeight = 25;
+        public static int GameHeight = 34;
 
-        public static int GameWidth = 80;
+        public static int GameWidth = 100;
 
         private static IGameManager gameManager;
 
@@ -23,12 +24,48 @@
         {
             Colors.ControlHostBack = Color.Black;
 
-            var startingConsole = new Console(GameWidth, GameHeight);
-            startingConsole.Fill(new Rectangle(3, 3, 27, 5), null, Color.Black, 0, SpriteEffects.None);
-            startingConsole.Print(6, 5, "Hello from SadConsole", ColorAnsi.CyanBright);
+            // Setup window
+            SadConsole.Game.Instance.Window.Title = "JARL - Powered by SadConsole";
 
-            // Set our new console as the thing to render and process
-            Global.CurrentScreen = startingConsole;
+            var mapConsole = new BorderedConsole(GameWidth - 20, 25)
+            {
+                Position = new Point(1, 1)
+            };
+
+            mapConsole.Fill(Color.White, Color.Black, 250, null);
+
+            var animation = new Animated("player", 1, 1);
+            var frame = animation.CreateFrame();
+            frame[0].Glyph = 1;
+            frame[0].Foreground = Color.GreenYellow;
+            frame[0].Background = Color.Transparent;
+
+            var entity = new Entity(animation)
+            {
+                Position = new Point(1, 1)
+            };
+
+            var manager = new EntityManager();
+            manager.Entities.Add(entity);
+
+            Global.CurrentScreen.Children.Add(mapConsole);
+            mapConsole.Children.Add(manager);
+
+            var messageLogConsole = new BorderedConsole(GameWidth - 2, 5)
+            {
+                Position = new Point(1, 28)
+            };
+
+            Global.CurrentScreen.Children.Add(messageLogConsole);
+
+            var mapStatsConsole = new BorderedConsole(16, 25)
+            {
+                Position = new Point(83, 1)
+            };
+
+            Global.CurrentScreen.Children.Add(mapStatsConsole);
+
+            Global.FocusedConsoles.Set(mapConsole);
         }
 
         static void Main(string[] args)
