@@ -7,23 +7,23 @@
     using Microsoft.Xna.Framework.Graphics;
     using Ninject;
     using SadConsole;
+    using SadConsole.Themes;
     using Console = SadConsole.Console;
     using Game = SadConsole.Game;
 
     public class Program
     {
-        public const int Height = 25;
+        public static int GameHeight = 25;
 
-        public const int Width = 80;
+        public static int GameWidth = 80;
 
         private static IGameManager gameManager;
 
         private static void Init()
         {
-            // Any custom loading and prep. We will use a sample console for now
+            Colors.ControlHostBack = Color.Black;
 
-            var startingConsole = new Console(Width, Height);
-            startingConsole.FillWithRandomGarbage();
+            var startingConsole = new Console(GameWidth, GameHeight);
             startingConsole.Fill(new Rectangle(3, 3, 27, 5), null, Color.Black, 0, SpriteEffects.None);
             startingConsole.Print(6, 5, "Hello from SadConsole", ColorAnsi.CyanBright);
 
@@ -35,8 +35,10 @@
         {
             RegisterTypes();
 
-            // Setup the engine and creat the main window.
-            Game.Create("Fonts/IBM.font", Width, Height);
+            Settings.ResizeMode = Settings.WindowResizeOptions.Scale;
+
+            // Setup the engine and create the main window.
+            Game.Create("Fonts/IBM.font", GameWidth, GameHeight);
 
             // Hook the start event so we can add consoles to the system.
             Game.OnInitialize = Init;
@@ -47,10 +49,7 @@
             // Start the game.
             Game.Instance.Run();
 
-            //
-            // Code here will not run until the game window closes.
-            //
-
+            // Clean up
             Game.Instance.Dispose();
         }
 
@@ -64,13 +63,6 @@
 
         private static void Update(GameTime time)
         {
-            // Called each logic update.
-            //if(Global.KeyboardState.IsKeyDown(Keys.F5))
-            //{
-            //    Settings.ToggleFullScreen();
-            //}
-
-            // As an example, we'll use the F5 key to make the game full screen
             gameManager.Update(time);
         }
     }

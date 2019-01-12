@@ -7,7 +7,7 @@ namespace ConsoleAppTest.Services
 
     public class KeyboardService : IKeyboardService
     {
-        public void IsKeyDown(Keys key)
+        public void IsKeyPressed(Keys key)
         {
             // As an example, we'll use the F5 key to make the game full screen
             if(Global.KeyboardState.IsKeyDown(Keys.F5))

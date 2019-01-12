@@ -5,6 +5,8 @@ namespace ConsoleAppTest.Services
 
     public interface IGameManager
     {
+        void Init();
+
         void Update(GameTime time);
     }
 

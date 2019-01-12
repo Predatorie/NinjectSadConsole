@@ -13,9 +13,13 @@ namespace ConsoleAppTest.Services
             this.keyboardService = keyboardService;
         }
 
+        public void Init()
+        {
+        }
+
         public void Update(GameTime time)
         {
-            this.keyboardService.IsKeyDown(Keys.F5);
+            this.keyboardService.IsKeyPressed(Keys.F5);
         }
     }
 
