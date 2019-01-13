@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace ConsoleAppTest.Services
+﻿namespace ConsoleAppTest.Services
 {
+
+    using Microsoft.Xna.Framework;
 
     public interface IGameManager
     {

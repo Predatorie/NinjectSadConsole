@@ -1,16 +1,14 @@
-﻿using Microsoft.Xna.Framework.Input;
-
-namespace ConsoleAppTest.Services
+﻿namespace ConsoleAppTest.Services
 {
 
+    using Microsoft.Xna.Framework.Input;
     using SadConsole;
 
     public class KeyboardService : IKeyboardService
     {
-        public void IsKeyPressed(Keys key)
+        public void IsKeyReleased(Keys key)
         {
-            // As an example, we'll use the F5 key to make the game full screen
-            if(Global.KeyboardState.IsKeyDown(Keys.F5))
+            if(Global.KeyboardState.IsKeyReleased(Keys.F5))
             {
                 Settings.ToggleFullScreen();
             }

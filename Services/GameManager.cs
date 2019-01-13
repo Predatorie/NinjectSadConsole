@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace ConsoleAppTest.Services
+﻿namespace ConsoleAppTest.Services
 {
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
 
     public class GameManager : IGameManager
     {
@@ -19,7 +19,7 @@ namespace ConsoleAppTest.Services
 
         public void Update(GameTime time)
         {
-            this.keyboardService.IsKeyPressed(Keys.F5);
+            this.keyboardService.IsKeyReleased(Keys.F5);
         }
     }
 

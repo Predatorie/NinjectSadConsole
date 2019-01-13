@@ -5,7 +5,7 @@ namespace ConsoleAppTest.Services
 
     public interface IKeyboardService
     {
-        void IsKeyPressed(Keys key);
+        void IsKeyReleased(Keys key);
     }
 
 }
